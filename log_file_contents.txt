@@ -1,0 +1,86 @@
+PDF Example:
+
+"GET /ielx7/8919/7934110/07828082.pdf?tp=&arnumber=7828082&isnumber=7934110 HTTP/1.1"
+
+ielx7 - Partition for the document.  All start with "ielx" with a number from 1 to 7 following.
+8919 - Unique publication number.
+7934110 - Unique issue number.
+07828082.pdf - Unique article Number
+
+The PDF can be in a frame and this would be the "referrer":
+
+"http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7828082" 
+
+You can only count examples with ".pdf" since someone can get a PDF with out a frame you don't want to double count.  So it is intersting to look at the frame URL but you can't use it to count PDF downloads.
+
+For Member Abuse:
+Member id = granting id This must be the case when examining member abuse.
+
+Mapping:
+
+String[] parts = str.split(" (?=(([^\"]*[\"]){2})*[^\"]*$)");
+host = parts[0]; //This is the host that served the request.  It will always be ieeexplore.ieee.org
+client_ip = parts[1]; //This is the outward facing IP of the requesting browser.  This can be the IP of their machine, proxy server, etc.
+place_holder = parts[2]; //No longer used
+seq_id = parts[3]; //This is either the member id, institutional id, or the combination of both.  This field isn't very useful.
+full_request_date_1 = parts[4]; //The date and time of the request
+full_request_date_2 = parts[5]; //The time zone from GM of the request
+clf_request = parts[6]; //The URL requested.
+clf_status = parts[7]; //The HTTP status of the request.
+content_length = parts[8]; //The size of the request in K
+referrer = parts[9]; //The page that was clicked on to get to this page or the page in which this item is a part of (Images or Rest Components).
+user_agent = parts[10]; //The user agent of the request.  Browser, version, platform, etc.
+erights_cookie = parts[11]; //The unique identifier for a session.  Sessions expire after 15 minutes of inactivity.
+alu = parts[12]; //Legacy field not used.
+product_id = parts[13]; //The id of the product that granted the user access to the protected content.
+institution_id = parts[14]; //The institutional id of the user.
+member_id = parts[15]; //The memeber id of the user.
+granting_id = parts[16]; //The id that granted access to the protected resource.  This has to be either the member id or the institutional id.
+unica_id = parts[17]; //Unique id for the user.  This is not reliable for users coming from the same IP.
+duration = parts[18]; //How long the user stayed on the page.
+desktop_name = parts[19]; //Use to track users within corporations.  Not many customers have this utility.
+desktop_email = parts[20]; //Use to track users within corporations.  Not many customers have this utility.
+desktop_code = parts[21]; //Use to track users within corporations.  Not many customers have this utility.
+sdr1 = parts[22]; //Use to track users within corporations.  Not many customers have this utility. SAML
+sdr2 = parts[23]; //Use to track users within corporations.  Not many customers have this utility. SAML
+sdr3 = parts[24]; //Use to track users within corporations.  Not many customers have this utility. SAML
+roaming_ip = parts[25]; //User can register their device at an institution to use when they are away.  This last for 30 days.  The IP that they are using for roaming goes here.
+finger_print = parts[26]; //A unique id stored in a permanent cookie to uniquely identify a device.  This is 100% reliable.  Cookies are pinned to browser so a user can have multiple browsers on a device and it will look like 3 devices.
+
+Mapping Example:
+
+ieeexplore.ieee.org 140.109.239.88 - 8334 [01/Oct/2017:00:00:00 -0400] "GET /assets/img/icon.support.gif HTTP/1.1" 200 878 "http://ieeexplore.ieee.org/document/4032188/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36" ij4nyreb5Bxxw6AFZ1Kuwx2BUgSlHQ1r1TJ*geA9j3M1x2BjfkK1jDY7JkVgx3Dx3D-18x2dWIxxgYSEkP9Lsoix2BefrHXeAx3Dx3D10jyPOvLcvbiTMT1NPTTkgx3Dx3D-74WfbdZD876j9q2bPIopZAx3Dx3D-hSx2Fy2PwxxNx2B4GkiZY7zyx2B7gx3Dx3D - - - - - ixC1jsaK5Hl-agv4nOH 224 - - - - - - - 5e91a7bde211df81c99a5bcb9e349e4c
+
+host = ieeexplore.ieee.org 
+client_ip = 140.109.239.88 
+place_holder = - 
+seq_id = 8334 
+full_request_date_1 = [01/Oct/2017:00:00:00 
+full_request_date_2 = -0400] 
+clf_request = "GET /assets/img/icon.support.gif HTTP/1.1" 
+clf_status = 200 
+content_length = 878 
+referrer = "http://ieeexplore.ieee.org/document/4032188/" 
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36" 
+erights_cookie = ij4nyreb5Bxxw6AFZ1Kuwx2BUgSlHQ1r1TJ*geA9j3M1x2BjfkK1jDY7JkVgx3Dx3D-18x2dWIxxgYSEkP9Lsoix2BefrHXeAx3Dx3D10jyPOvLcvbiTMT1NPTTkgx3Dx3D-74WfbdZD876j9q2bPIopZAx3Dx3D-hSx2Fy2PwxxNx2B4GkiZY7zyx2B7gx3Dx3D 
+alu = - 
+product_id = - 
+institution_id = - 
+member_id = - 
+granting_id = - 
+unica_id = ixC1jsaK5Hl-agv4nOH  
+duration = 224
+desktop_name = - 
+desktop_email = - 
+desktop_code = - 
+sdr1 = - 
+sdr2 = - 
+sdr3 = - 
+roaming_ip = -
+finger_print = 5e91a7bde211df81c99a5bcb9e349e4c
+
+
+
+
+
+					
